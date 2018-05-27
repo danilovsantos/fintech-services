@@ -9,7 +9,10 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
+/**
+ * @author Danilo Valente
+ * Classe responsável pela conversão entre DTO e Entity.
+ */
 @Component
 public class ContaPessoaFisicaMapper {
 
@@ -20,13 +23,15 @@ public class ContaPessoaFisicaMapper {
 
         PessoaFisicaDTO pessoaDto = this.pessoaMapper.parseEntityToDto(entity.getPessoa());
 
+        pessoaDto.setIdTipoPessoa(entity.getPessoa().getTipoPessoa().getId());
+
         ContaPessoaFisicaDTO dto = new ContaPessoaFisicaDTO();
 
         dto.setSaldo(new BigDecimal(entity.getSaldo().doubleValue()).setScale(2, RoundingMode.HALF_EVEN));
         dto.setIdConta(entity.getId());
         dto.setDataCriacao(entity.getDataCriacao());
-        dto.setIdTipoConta(entity.getTipoContaEntity().getId());
-        dto.setIdStatusConta(entity.getStatusContaEntity().getId());
+        dto.setIdTipoConta(entity.getTipoContaBancaria().getId());
+        dto.setIdStatusConta(entity.getStatusContaBancaria().getId());
         dto.setPessoaFisica(pessoaDto);
 
         if(entity.getContaBancariaPai() != null){

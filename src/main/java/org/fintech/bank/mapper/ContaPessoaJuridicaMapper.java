@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * @author Danilo Valente
+ * Classe responsável pela conversão entre DTO e Entity.
+ */
 @Component
 public class ContaPessoaJuridicaMapper {
 
@@ -25,8 +29,8 @@ public class ContaPessoaJuridicaMapper {
         contaDTO.setSaldo(new BigDecimal(entity.getSaldo().doubleValue()).setScale(2, RoundingMode.HALF_EVEN));
         contaDTO.setIdConta(entity.getId());
         contaDTO.setDataCriacao(entity.getDataCriacao());
-        contaDTO.setIdTipoConta(entity.getTipoContaEntity().getId());
-        contaDTO.setIdStatusConta(entity.getStatusContaEntity().getId());
+        contaDTO.setIdTipoConta(entity.getTipoContaBancaria().getId());
+        contaDTO.setIdStatusConta(entity.getStatusContaBancaria().getId());
         contaDTO.setPessoaJuridica(pessoaDTO);
 
         if(entity.getContaBancariaPai() != null){

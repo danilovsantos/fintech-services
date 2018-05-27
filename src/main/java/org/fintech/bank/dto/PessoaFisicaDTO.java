@@ -26,6 +26,9 @@ public class PessoaFisicaDTO {
     @PastOrPresent(message = "Data de Nascimento deve ser menor ou igual a data atual.")
     private LocalDate dataNascimento;
 
+    @NotNull(message = "ID do Tipo de Conta não pode ser Nulo.")
+    private Long idTipoPessoa;
+
     public PessoaFisicaDTO(){}
 
     public PessoaFisicaDTO(Long idPessoa, String nome, Long cpf, LocalDate dataNascimento){
@@ -67,4 +70,11 @@ public class PessoaFisicaDTO {
         this.dataNascimento = dataNascimento;
     }
 
+    public Long getIdTipoPessoa() {
+        return idTipoPessoa;
+    }
+
+    public void setIdTipoPessoa(Long idTipoPessoa) {
+        this.idTipoPessoa = idTipoPessoa;
+    }
 }

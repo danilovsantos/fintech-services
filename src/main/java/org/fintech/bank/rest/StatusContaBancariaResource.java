@@ -1,4 +1,4 @@
-package org.fintech.bank.rest;
+/*package org.fintech.bank.rest;
 
 import org.fintech.bank.dto.StatusContaBancariaDTO;
 import org.fintech.bank.service.StatusContaBancariaService;
@@ -35,4 +35,4 @@ public class StatusContaBancariaResource {
         return ResponseEntity.accepted().body(lista);
     }
 
-}
+}*/

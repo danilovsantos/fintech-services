@@ -6,6 +6,10 @@ import org.fintech.bank.entity.TipoPessoaEntity;
 import org.fintech.bank.enums.TipoPessoaEnum;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Danilo Valente
+ * Classe responsável pela conversão entre DTO e Entity.
+ */
 @Component
 public class PessoaFisicaMapper {
 

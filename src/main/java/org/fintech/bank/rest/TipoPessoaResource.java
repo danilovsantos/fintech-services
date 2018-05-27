@@ -1,4 +1,4 @@
-package org.fintech.bank.rest;
+/*package org.fintech.bank.rest;
 
 import org.fintech.bank.dto.TipoPessoaDTO;
 import org.fintech.bank.service.TipoPessoaService;
@@ -35,4 +35,4 @@ public class TipoPessoaResource {
         return ResponseEntity.accepted().body(lista);
     }
 
-}
+}*/

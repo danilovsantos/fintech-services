@@ -2,7 +2,7 @@ package org.fintech.bank.service;
 
 import org.fintech.bank.dto.ContaPessoaJuridicaDTO;
 import org.fintech.bank.entity.ContaBancariaEntity;
-import org.fintech.bank.exception.ContaPaiNaoLocalizadaException;
+import org.fintech.bank.exception.ContaPaiInvalidaException;
 import org.fintech.bank.exception.StatusContaInvalidoException;
 import org.fintech.bank.exception.TipoContaInvalidoException;
 import org.fintech.bank.mapper.ContaPessoaJuridicaMapper;
@@ -59,7 +59,7 @@ public class ContaPessoaJuridicaService {
 
         if(contaPessoaJuridicaDTO.getIdContaPai() != null){
             if(!this.contaBancariaRepository.existsById(contaPessoaJuridicaDTO.getIdContaPai())){
-                throw new ContaPaiNaoLocalizadaException(contaPessoaJuridicaDTO.getIdContaPai());
+                throw new ContaPaiInvalidaException();
             }
             this.contaBancariaEntity.setContaBancariaPai(this.contaBancariaRepository.findById(contaPessoaJuridicaDTO.getIdContaPai()).get());
         }
@@ -69,9 +69,9 @@ public class ContaPessoaJuridicaService {
 
         if(contaPessoaJuridicaDTO.getIdTipoConta() != null){
             if(!this.tipoContaBancariaRepository.existsById(contaPessoaJuridicaDTO.getIdTipoConta())){
-                throw new TipoContaInvalidoException(contaPessoaJuridicaDTO.getIdTipoConta());
+                throw new TipoContaInvalidoException();
             }
-            this.contaBancariaEntity.setTipoContaEntity(this.tipoContaBancariaRepository.findById(contaPessoaJuridicaDTO.getIdTipoConta()).get());
+            this.contaBancariaEntity.setTipoContaBancaria(this.tipoContaBancariaRepository.findById(contaPessoaJuridicaDTO.getIdTipoConta()).get());
         }
 
 
@@ -79,9 +79,9 @@ public class ContaPessoaJuridicaService {
 
         if(contaPessoaJuridicaDTO.getIdStatusConta() != null){
             if(!this.statusContaBancariaRepository.existsById(contaPessoaJuridicaDTO.getIdStatusConta())){
-                throw new StatusContaInvalidoException(contaPessoaJuridicaDTO.getIdStatusConta());
+                throw new StatusContaInvalidoException();
             }
-            this.contaBancariaEntity.setStatusContaEntity(this.statusContaBancariaRepository.findById(contaPessoaJuridicaDTO.getIdStatusConta()).get());
+            this.contaBancariaEntity.setStatusContaBancaria(this.statusContaBancariaRepository.findById(contaPessoaJuridicaDTO.getIdStatusConta()).get());
         }
 
     }

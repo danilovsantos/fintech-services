@@ -19,17 +19,17 @@ public class ContaBancariaEntity {
     @Column(name = "DATA_CRIACAO", nullable = false)
     private LocalDate dataCriacao;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_PESSOA")
     private PessoaEntity pessoa;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_TIPO_CONTA")
-    private TipoContaBancariaEntity tipoContaEntity;
+    private TipoContaBancariaEntity tipoContaBancaria;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_STATUS_CONTA")
-    private StatusContaBancariaEntity statusContaEntity;
+    private StatusContaBancariaEntity statusContaBancaria;
 
     @ManyToOne
     @JoinColumn(name = "ID_CONTA_PAI")
@@ -67,20 +67,20 @@ public class ContaBancariaEntity {
         this.pessoa = pessoa;
     }
 
-    public TipoContaBancariaEntity getTipoContaEntity() {
-        return tipoContaEntity;
+    public TipoContaBancariaEntity getTipoContaBancaria() {
+        return tipoContaBancaria;
     }
 
-    public void setTipoContaEntity(TipoContaBancariaEntity tipoContaEntity) {
-        this.tipoContaEntity = tipoContaEntity;
+    public void setTipoContaBancaria(TipoContaBancariaEntity tipoContaBancaria) {
+        this.tipoContaBancaria = tipoContaBancaria;
     }
 
-    public StatusContaBancariaEntity getStatusContaEntity() {
-        return statusContaEntity;
+    public StatusContaBancariaEntity getStatusContaBancaria() {
+        return statusContaBancaria;
     }
 
-    public void setStatusContaEntity(StatusContaBancariaEntity statusContaEntity) {
-        this.statusContaEntity = statusContaEntity;
+    public void setStatusContaBancaria(StatusContaBancariaEntity statusContaBancaria) {
+        this.statusContaBancaria = statusContaBancaria;
     }
 
     public ContaBancariaEntity getContaBancariaPai() {
