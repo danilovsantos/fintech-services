@@ -49,11 +49,12 @@ public class TransacaoFinanceiraService {
      * Realiza transação financeira.
      * @param transacaoDTO
      */
-    public void realizarTransacao(TransacaoFinanceiraDTO transacaoDTO){
+    public TransacaoFinanceiraDTO realizarTransacao(TransacaoFinanceiraDTO transacaoDTO){
         this.popularEntidadeTransacao(transacaoDTO);
         this.validarEntidadeTransacao();
         this.prepararTransacao();
         this.transFinRepository.save(this.transFinEntity);
+        return this.mapper.parseEntityToDto(this.transFinEntity);
     }
 
 
