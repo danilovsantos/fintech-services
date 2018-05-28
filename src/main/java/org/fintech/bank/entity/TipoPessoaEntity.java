@@ -2,6 +2,10 @@ package org.fintech.bank.entity;
 
 import javax.persistence.*;
 
+/**
+ * @author Danilo Valente
+ */
+
 @Entity
 @Table(name = "TB_TIPO_PESSOA")
 public class TipoPessoaEntity {

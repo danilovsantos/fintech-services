@@ -1,18 +1,13 @@
 package org.fintech.bank.enums;
 
-/**
- * @author Danilo Valente
- */
+public enum TipoTransacaoFinEnum {
 
-public enum StatusContaEnum {
-
-    ATIVA(1L),
-    BLOQUEADA(2L),
-    CANCELADA(3L);
+    TRANSFERENCIA(1L),
+    ESTORNO(2L);
 
     private Long value;
 
-    StatusContaEnum(Long value){
+    TipoTransacaoFinEnum(Long value){
         this.value = value;
     }
 

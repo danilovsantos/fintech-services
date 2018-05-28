@@ -5,11 +5,14 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * @author Danilo Valente
+ */
+
 public class TransacaoFinanceiraDTO {
 
     private Long idTransacao;
 
-    @NotNull
     @Digits(integer = 12, fraction = 12, message = "Valor deve conter no máximo 12 dígitos.")
     private BigDecimal valor;
     private String descricao;

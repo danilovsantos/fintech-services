@@ -23,6 +23,7 @@ public class ContaPessoaJuridicaMapper {
     public ContaPessoaJuridicaDTO parseEntityToDto(ContaBancariaEntity entity){
 
         PessoaJuridicaDTO pessoaDTO = this.pessoaMapper.parseEntityToDto(entity.getPessoa());
+        pessoaDTO.setIdTipoPessoa(entity.getPessoa().getTipoPessoa().getId());
 
         ContaPessoaJuridicaDTO contaDTO = new ContaPessoaJuridicaDTO();
 

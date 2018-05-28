@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Danilo Valente
+ */
 @Component
 public class TipoPessoaService {
 

@@ -3,6 +3,10 @@ package org.fintech.bank.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * @author Danilo Valente
+ */
+
 @Entity
 @Table(name = "TB_PESSOA")
 public class PessoaEntity {

@@ -1,5 +1,9 @@
 package org.fintech.bank.exception;
 
+/**
+ * @author Danilo Valente
+ */
+
 public class TipoTransacaoFinanceiraInvalidaException extends RuntimeException{
 
     public TipoTransacaoFinanceiraInvalidaException() {
@@ -8,6 +12,6 @@ public class TipoTransacaoFinanceiraInvalidaException extends RuntimeException{
 
     @Override
     public String getMessage() {
-        return "Tipo Transação Financeira Inválido.";
+        return "Tipo Transação Financeira Selecionado é Inválido.";
     }
 }

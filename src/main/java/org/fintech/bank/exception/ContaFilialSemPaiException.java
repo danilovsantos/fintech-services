@@ -1,5 +1,9 @@
 package org.fintech.bank.exception;
 
+/**
+ * @author Danilo Valente
+ */
+
 public class ContaFilialSemPaiException extends RuntimeException{
 
     public ContaFilialSemPaiException() {

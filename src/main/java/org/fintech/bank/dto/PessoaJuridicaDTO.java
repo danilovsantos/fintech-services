@@ -4,6 +4,10 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * @author Danilo Valente
+ */
+
 public class PessoaJuridicaDTO {
 
     private Long idPessoa;
@@ -19,6 +23,9 @@ public class PessoaJuridicaDTO {
     @NotNull(message = "Nome Fantasia não pode ser Nulo.")
     @Size(max = 45, message = "Nome Fantasia deve conter no máximo 45 caracteres.")
     private String nomeFantasia;
+
+    @NotNull(message = "ID do Tipo de Conta não pode ser Nulo.")
+    private Long idTipoPessoa;
 
     public Long getIdPessoa() {
         return idPessoa;
@@ -52,4 +59,11 @@ public class PessoaJuridicaDTO {
         this.nomeFantasia = nomeFantasia;
     }
 
+    public Long getIdTipoPessoa() {
+        return idTipoPessoa;
+    }
+
+    public void setIdTipoPessoa(Long idTipoPessoa) {
+        this.idTipoPessoa = idTipoPessoa;
+    }
 }

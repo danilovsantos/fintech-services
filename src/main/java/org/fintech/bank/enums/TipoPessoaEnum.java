@@ -1,5 +1,9 @@
 package org.fintech.bank.enums;
 
+/**
+ * @author Danilo Valente
+ */
+
 public enum TipoPessoaEnum {
 
     PESSOA_FISICA(1L),

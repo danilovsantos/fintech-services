@@ -2,6 +2,10 @@ package org.fintech.bank.entity;
 
 import javax.persistence.*;
 
+/**
+ * @author Danilo Valente
+ */
+
 @Entity
 @Table(name = "TB_TIPO_TRANSACAO_FIN")
 public class TipoTransacaoFinanceiraEntity {
@@ -13,6 +17,12 @@ public class TipoTransacaoFinanceiraEntity {
 
     @Column(name = "DESCRICAO", nullable = false, unique = true)
     private String descricao;
+
+    public TipoTransacaoFinanceiraEntity(){}
+
+    public TipoTransacaoFinanceiraEntity(Long id){
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

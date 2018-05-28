@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+/**
+ * @author Danilo Valente
+ */
+
 @Component
 public class ContaPessoaFisicaService {
 
@@ -87,6 +91,8 @@ public class ContaPessoaFisicaService {
             this.contaBancariaEntity.setStatusContaBancaria(this.statusContaBancariaRepository.findById(contaPessoaFisicaDto.getIdStatusConta()).get());
         }
 
+        //Seta tipo de pessoa.
+
         if(contaPessoaFisicaDto.getPessoaFisica().getIdTipoPessoa() != null){
             if(!this.tipoPessoaRepository.existsById(contaPessoaFisicaDto.getPessoaFisica().getIdTipoPessoa())){
                 throw new TipoPessoaInvalidoException();
@@ -96,7 +102,9 @@ public class ContaPessoaFisicaService {
 
     }
 
-
+    /**
+     * Verifica se o tipo de conta é Filial e se possui conta Pai.
+     */
     private void validarEntidadeContaBancaria(){
         if(this.contaBancariaEntity.getTipoContaBancaria().getId() == TipoContaEnum.FILIAL.getValue()){
             if(this.contaBancariaEntity.getContaBancariaPai() == null){

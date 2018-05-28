@@ -1,5 +1,9 @@
 package org.fintech.bank.enums;
 
+/**
+ * @author Danilo Valente
+ */
+
 public enum TipoContaEnum {
 
     MATRIZ(1L),

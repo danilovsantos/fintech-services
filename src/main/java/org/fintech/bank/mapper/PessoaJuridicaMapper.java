@@ -2,8 +2,6 @@ package org.fintech.bank.mapper;
 
 import org.fintech.bank.dto.PessoaJuridicaDTO;
 import org.fintech.bank.entity.PessoaEntity;
-import org.fintech.bank.entity.TipoPessoaEntity;
-import org.fintech.bank.enums.TipoPessoaEnum;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,7 +18,6 @@ public class PessoaJuridicaMapper {
         entity.setId(dto.getIdPessoa());
         entity.setCnpj(dto.getCNPJ());
         entity.setNomeFantasia(dto.getNomeFantasia());
-        entity.setTipoPessoa(new TipoPessoaEntity(TipoPessoaEnum.PESSOA_FISICA.getValue()));
 
         return entity;
     }
@@ -33,6 +30,7 @@ public class PessoaJuridicaMapper {
         dto.setCNPJ(entity.getCnpj());
         dto.setNomeFantasia(entity.getNomeFantasia());
         dto.setRazaoSocial(entity.getRazaoSocial());
+        dto.setIdTipoPessoa(entity.getTipoPessoa().getId());
 
         return dto;
     }

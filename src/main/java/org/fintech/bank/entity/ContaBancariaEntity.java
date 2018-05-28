@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * @author Danilo Valente
+ */
+
 @Entity
 @Table(name = "TB_CONTA")
 public class ContaBancariaEntity {

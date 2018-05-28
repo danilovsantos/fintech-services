@@ -5,14 +5,20 @@ import org.fintech.bank.entity.ContaBancariaEntity;
 import org.fintech.bank.exception.ContaPaiInvalidaException;
 import org.fintech.bank.exception.StatusContaInvalidoException;
 import org.fintech.bank.exception.TipoContaInvalidoException;
+import org.fintech.bank.exception.TipoPessoaInvalidoException;
 import org.fintech.bank.mapper.ContaPessoaJuridicaMapper;
 import org.fintech.bank.repository.ContaBancariaRepository;
 import org.fintech.bank.repository.StatusContaBancariaRepository;
 import org.fintech.bank.repository.TipoContaBancariaRepository;
+import org.fintech.bank.repository.TipoPessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+
+/**
+ * @author Danilo Valente
+ */
 
 @Component
 public class ContaPessoaJuridicaService {
@@ -22,6 +28,9 @@ public class ContaPessoaJuridicaService {
 
     @Autowired
     private TipoContaBancariaRepository tipoContaBancariaRepository;
+
+    @Autowired
+    private TipoPessoaRepository tipoPessoaRepository;
 
     @Autowired
     private StatusContaBancariaRepository statusContaBancariaRepository;
@@ -82,6 +91,15 @@ public class ContaPessoaJuridicaService {
                 throw new StatusContaInvalidoException();
             }
             this.contaBancariaEntity.setStatusContaBancaria(this.statusContaBancariaRepository.findById(contaPessoaJuridicaDTO.getIdStatusConta()).get());
+        }
+
+        //Seta tipo de pessoa.
+
+        if(contaPessoaJuridicaDTO.getPessoaJuridica().getIdTipoPessoa() != null){
+            if(!this.tipoPessoaRepository.existsById(contaPessoaJuridicaDTO.getPessoaJuridica().getIdTipoPessoa())){
+                throw new TipoPessoaInvalidoException();
+            }
+            this.contaBancariaEntity.getPessoa().setTipoPessoa(this.tipoPessoaRepository.findById(contaPessoaJuridicaDTO.getPessoaJuridica().getIdTipoPessoa()).get());
         }
 
     }

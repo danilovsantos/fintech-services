@@ -26,7 +26,7 @@ public class PessoaFisicaDTO {
     @PastOrPresent(message = "Data de Nascimento deve ser menor ou igual a data atual.")
     private LocalDate dataNascimento;
 
-    @NotNull(message = "ID do Tipo de Conta não pode ser Nulo.")
+    @NotNull(message = "Tipo de Pessoa não pode ser Nulo.")
     private Long idTipoPessoa;
 
     public PessoaFisicaDTO(){}

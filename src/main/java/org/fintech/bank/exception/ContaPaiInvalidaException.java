@@ -1,5 +1,9 @@
 package org.fintech.bank.exception;
 
+/**
+ * @author Danilo Valente
+ */
+
 public class ContaPaiInvalidaException extends RuntimeException{
 
     public ContaPaiInvalidaException() {

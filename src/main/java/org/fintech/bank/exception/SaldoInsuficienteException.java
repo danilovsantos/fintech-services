@@ -1,5 +1,9 @@
 package org.fintech.bank.exception;
 
+/**
+ * @author Danilo Valente
+ */
+
 public class SaldoInsuficienteException extends RuntimeException{
 
     public SaldoInsuficienteException() {

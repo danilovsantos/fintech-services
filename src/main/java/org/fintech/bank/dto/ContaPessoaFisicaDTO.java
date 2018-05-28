@@ -2,6 +2,10 @@ package org.fintech.bank.dto;
 
 import javax.validation.Valid;
 
+/**
+ * @author Danilo Valente
+ */
+
 public class ContaPessoaFisicaDTO extends  ContaPessoaDTO{
 
     @Valid

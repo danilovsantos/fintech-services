@@ -6,6 +6,7 @@ import org.fintech.bank.entity.TipoTransacaoFinanceiraEntity;
 import org.fintech.bank.entity.TransacaoFinanceiraEntity;
 import org.fintech.bank.enums.StatusContaEnum;
 import org.fintech.bank.enums.TipoContaEnum;
+import org.fintech.bank.enums.TipoTransacaoFinEnum;
 import org.fintech.bank.exception.*;
 import org.fintech.bank.mapper.TransacaoFinanceiraMapper;
 import org.fintech.bank.repository.ContaBancariaRepository;
@@ -20,6 +21,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+/**
+ * @author Danilo Valente
+ */
 
 @Component
 public class TransacaoFinanceiraService {
@@ -81,7 +86,7 @@ public class TransacaoFinanceiraService {
             throw new TransacaoFinanceiraIncompativelException();
         }
 
-        // Verifica se é uma transação entre contas matriz e se o número do aporte foi informado.
+        // Verifica se é uma transação entre contas matrizes e se o número do aporte foi informado.
         if(contaOrigem.getTipoContaBancaria().getId() == TipoContaEnum.MATRIZ.getValue()
                 && contaDestino.getTipoContaBancaria().getId() == TipoContaEnum.MATRIZ.getValue()){
             if(this.transFinEntity.getCodigoAporte() == null
@@ -100,7 +105,7 @@ public class TransacaoFinanceiraService {
             throw new ContaDestinoCanceladaException();
         }
 
-        // veirifcar se a conta origem possui saldo suficiente para transação.
+        // veirifca se a conta origem possui saldo suficiente para transação.
         if(contaOrigem.getSaldo().doubleValue() < this.transFinEntity.getValor().doubleValue()){
             throw new SaldoInsuficienteException();
         }
@@ -121,15 +126,11 @@ public class TransacaoFinanceiraService {
 
         this.transFinEntity = new TransacaoFinanceiraEntity();
 
+        this.transFinEntity.setId(transacaoDTO.getIdTransacao());
         this.transFinEntity.setDataTransacao(LocalDate.now());
         this.transFinEntity.setCodigoAporte(transacaoDTO.getCodigoAporte());
         this.transFinEntity.setDescricao(transacaoDTO.getDescricao());
-
-        if(this.transFinEntity.getValor() == null){
-            this.transFinEntity.setValor(new BigDecimal(00.00).setScale(2,RoundingMode.HALF_EVEN));
-        }else{
-            this.transFinEntity.setValor(new BigDecimal(transacaoDTO.getValor().doubleValue()).setScale(2,RoundingMode.HALF_EVEN));
-        }
+        this.transFinEntity.setValor(new BigDecimal(transacaoDTO.getValor().doubleValue()).setScale(2, RoundingMode.HALF_EVEN));
 
         // Verifica se a conta origem é válida.
         if(contaOrigem.isPresent()){

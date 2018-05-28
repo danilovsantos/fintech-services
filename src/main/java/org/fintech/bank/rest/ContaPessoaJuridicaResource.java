@@ -12,7 +12,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-
+/**
+ * @author Danilo Valente
+ */
 @RestController
 @RequestMapping("/api")
 public class ContaPessoaJuridicaResource {

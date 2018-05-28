@@ -1,5 +1,9 @@
 package org.fintech.bank.dto;
 
+/**
+ * @author Danilo Valente
+ */
+
 public class StatusContaBancariaDTO {
 
     private Long id;
