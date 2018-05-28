@@ -1,0 +1,283 @@
+Exemplo Sucesso (Cadastro Contas Matriz)
+http://localhost:8080/api/conta/pessoa-fisica
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Siclano da Silva ",
+        "cpf": 12569999999,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+http://localhost:8080/api/transacao-financeira
+Exemplo Sucesso (Transferencia entre contas Matriz)
+
+{
+  "idTransacao": null,
+  "codigoAporte": "KNDID789",
+  "descricao": "Transferencia Bancária",
+  "idContaOrigem": 5,
+  "idContaDestino": 6,
+  "idTipoTransacao": 1,
+  "valor": 100.00
+}
+
+
+Exemplo Sucesso (Estorno de valores)
+http://localhost:8080/api/transacao-financeira-estorno/1
+
+
+Exemplo Erro (idTipoConta = 2 (filial) sem idContaPai)
+
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 2,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva ",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+
+Exemplo Erro (idContaPai não localizado)
+
+{
+	"idConta": null,
+	"idContaPai": 1,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+
+Exemplo Erro (idTipoConta não informado)
+
+{
+	"idConta": null,
+	"idContaPai": 1,
+    "saldo": 500.00,
+    "idTipoConta": null,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (idStatusConta não informado)
+
+{
+	"idConta": null,
+	"idContaPai": 1,
+    "saldo": 500.00,
+    "idTipoConta": null,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (idStatusConta não informado)
+
+{
+	"idConta": null,
+	"idContaPai": 1,
+    "saldo": 500.00,
+    "idTipoConta": null,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (idStatusConta inválido)
+
+{
+	"idConta": null,
+	"idContaPai": 1,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 4,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (nome não informado)
+
+{
+	"idConta": null,
+	"idContaPai": 1,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": null,
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (nome muito grande)
+
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva____________________________________________________________",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (cpf nulo)
+
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva ",
+        "cpf": null,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (cpf muito grande)
+
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva ",
+        "cpf": 123569871232121212,
+        "idTipoPessoa": 1,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (idTipoPessoa invalido)
+
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva ",
+        "cpf": 12356987123,
+        "idTipoPessoa": 5,
+        "dataNascimento": "1986-04-25"
+    }
+}
+
+Exemplo Erro (dataNascimento nulo)
+
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva ",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": null
+    }
+}
+
+Exemplo Erro (dataNascimento maior que data atual)
+
+{
+	"idConta": null,
+	"idContaPai": null,
+    "saldo": 500.00,
+    "idTipoConta": 1,
+    "idStatusConta": 1,
+    "pessoaFisica": {
+        "nome": "Fulano da Silva ",
+        "cpf": 12356987123,
+        "idTipoPessoa": 1,
+        "dataNascimento": "2018-05-29"
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

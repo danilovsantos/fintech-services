@@ -35,9 +35,9 @@ public class TransacaoFinanceiraResource {
         return ResponseEntity.accepted().body("");
     }
 
-    @GetMapping("/transacao-financeira-estorno/{idTransacao}/{codigoAporte}")
-    public ResponseEntity update(@PathVariable Long idTransacao, @PathVariable String codigoAporte){
-        this.estornoService.realizarEstorno(idTransacao, codigoAporte);
+    @GetMapping("/transacao-financeira-estorno/{idTransacao}")
+    public ResponseEntity estorno(@PathVariable Long idTransacao){
+        this.estornoService.realizarEstorno(idTransacao);
         return ResponseEntity.accepted().body("Estorno de transação realizado com sucesso!");
     }
 

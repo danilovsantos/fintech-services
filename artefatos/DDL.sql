@@ -1,0 +1,161 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema fintechbank
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema fintechbank
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `fintechbank` DEFAULT CHARACTER SET utf8 ;
+USE `fintechbank` ;
+
+-- -----------------------------------------------------
+-- Table `fintechbank`.`TB_TIPO_PESSOA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fintechbank`.`TB_TIPO_PESSOA` (
+  `ID_TIPO_PESSOA` INT NOT NULL AUTO_INCREMENT,
+  `DESCRICAO` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID_TIPO_PESSOA`),
+  UNIQUE INDEX `DESCRICAO_UNIQUE` (`DESCRICAO` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `fintechbank`.`TB_PESSOA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fintechbank`.`TB_PESSOA` (
+  `ID_PESSOA` INT NOT NULL AUTO_INCREMENT,
+  `CNPJ` BIGINT(14) NULL,
+  `CPF` BIGINT(11) NULL,
+  `NOME` VARCHAR(60) NULL,
+  `RAZAO_SOCIAL` VARCHAR(45) NULL,
+  `NOME_FANTASIA` VARCHAR(45) NULL,
+  `DATA_NASCIMENTO` DATE NULL,
+  `ID_TIPO_PESSOA` INT NOT NULL,
+  PRIMARY KEY (`ID_PESSOA`, `ID_TIPO_PESSOA`),
+  UNIQUE INDEX `CNPJ_UNIQUE` (`CNPJ` ASC),
+  UNIQUE INDEX `CPF_UNIQUE` (`CPF` ASC),
+  INDEX `fk_TB_PESSOA_TB_TIPO_PESSOA1_idx` (`ID_TIPO_PESSOA` ASC),
+  CONSTRAINT `fk_TB_PESSOA_TB_TIPO_PESSOA1`
+    FOREIGN KEY (`ID_TIPO_PESSOA`)
+    REFERENCES `fintechbank`.`TB_TIPO_PESSOA` (`ID_TIPO_PESSOA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `fintechbank`.`TB_STATUS_CONTA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fintechbank`.`TB_STATUS_CONTA` (
+  `ID_STATUS_CONTA` INT NOT NULL AUTO_INCREMENT,
+  `DESCRICAO` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID_STATUS_CONTA`),
+  UNIQUE INDEX `DESCRICAO_UNIQUE` (`DESCRICAO` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `fintechbank`.`TB_TIPO_CONTA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fintechbank`.`TB_TIPO_CONTA` (
+  `ID_TIPO_CONTA` INT NOT NULL AUTO_INCREMENT,
+  `DESCRICAO` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID_TIPO_CONTA`),
+  UNIQUE INDEX `DESCRICAO_UNIQUE` (`DESCRICAO` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `fintechbank`.`TB_CONTA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fintechbank`.`TB_CONTA` (
+  `ID_CONTA` INT NOT NULL AUTO_INCREMENT,
+  `SALDO` DECIMAL(12,2) NULL,
+  `DATA_CRIACAO` TIMESTAMP NOT NULL,
+  `ID_CONTA_PAI` INT NULL,
+  `ID_PESSOA` INT NOT NULL,
+  `ID_STATUS_CONTA` INT NOT NULL,
+  `ID_TIPO_CONTA` INT NOT NULL,
+  PRIMARY KEY (`ID_CONTA`, `ID_PESSOA`, `ID_STATUS_CONTA`, `ID_TIPO_CONTA`),
+  INDEX `fk_CONTA_CONTA_idx` (`ID_CONTA_PAI` ASC),
+  INDEX `fk_CONTA_TB_PESSOA1_idx` (`ID_PESSOA` ASC),
+  INDEX `fk_TB_CONTA_TB_STATUS_CONTA1_idx` (`ID_STATUS_CONTA` ASC),
+  INDEX `fk_TB_CONTA_TB_TIPO_CONTA1_idx` (`ID_TIPO_CONTA` ASC),
+  CONSTRAINT `fk_TB_CONTA_TB_CONTA`
+    FOREIGN KEY (`ID_CONTA_PAI`)
+    REFERENCES `fintechbank`.`TB_CONTA` (`ID_CONTA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TB_CONTA_TB_PESSOA1`
+    FOREIGN KEY (`ID_PESSOA`)
+    REFERENCES `fintechbank`.`TB_PESSOA` (`ID_PESSOA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TB_CONTA_TB_STATUS_CONTA1`
+    FOREIGN KEY (`ID_STATUS_CONTA`)
+    REFERENCES `fintechbank`.`TB_STATUS_CONTA` (`ID_STATUS_CONTA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TB_CONTA_TB_TIPO_CONTA1`
+    FOREIGN KEY (`ID_TIPO_CONTA`)
+    REFERENCES `fintechbank`.`TB_TIPO_CONTA` (`ID_TIPO_CONTA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `fintechbank`.`TB_TIPO_TRANSACAO_FIN`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fintechbank`.`TB_TIPO_TRANSACAO_FIN` (
+  `ID_TIPO_TRANS_FIN` INT NOT NULL AUTO_INCREMENT,
+  `DESCRICAO` VARCHAR(45) NULL,
+  PRIMARY KEY (`ID_TIPO_TRANS_FIN`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `fintechbank`.`TB_TRANSACAO_FIN`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fintechbank`.`TB_TRANSACAO_FIN` (
+  `ID_TRANSACAO_FIN` INT NOT NULL AUTO_INCREMENT,
+  `VALOR` DECIMAL(12,2) NOT NULL,
+  `DESCRICAO` VARCHAR(45) NULL,
+  `DATA_TRANSACAO` TIMESTAMP NOT NULL,
+  `CODIGO_APORTE` VARCHAR(45) NULL,
+  `ID_TIPO_TRANS_FIN` INT NOT NULL,
+  `ID_CONTA_ORIGEM` INT NOT NULL,
+  `ID_CONTA_DESTINO` INT NOT NULL,
+  PRIMARY KEY (`ID_TRANSACAO_FIN`, `ID_TIPO_TRANS_FIN`, `ID_CONTA_ORIGEM`, `ID_CONTA_DESTINO`),
+  INDEX `fk_TB_TRANSACAO_FIN_TB_TIPO_TRANSACAO_FIN1_idx` (`ID_TIPO_TRANS_FIN` ASC),
+  INDEX `fk_TB_TRANSACAO_FIN_TB_CONTA1_idx` (`ID_CONTA_ORIGEM` ASC),
+  INDEX `fk_TB_TRANSACAO_FIN_TB_CONTA2_idx` (`ID_CONTA_DESTINO` ASC),
+  UNIQUE INDEX `CODIGO_UNIQUE` (`CODIGO_APORTE` ASC),
+  CONSTRAINT `fk_TB_TRANSACAO_FIN_TB_TIPO_TRANSACAO_FIN1`
+    FOREIGN KEY (`ID_TIPO_TRANS_FIN`)
+    REFERENCES `fintechbank`.`TB_TIPO_TRANSACAO_FIN` (`ID_TIPO_TRANS_FIN`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TB_TRANSACAO_FIN_TB_CONTA1`
+    FOREIGN KEY (`ID_CONTA_ORIGEM`)
+    REFERENCES `fintechbank`.`TB_CONTA` (`ID_CONTA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TB_TRANSACAO_FIN_TB_CONTA2`
+    FOREIGN KEY (`ID_CONTA_DESTINO`)
+    REFERENCES `fintechbank`.`TB_CONTA` (`ID_CONTA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

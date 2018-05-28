@@ -4,7 +4,6 @@ import org.fintech.bank.entity.ContaBancariaEntity;
 import org.fintech.bank.entity.TipoTransacaoFinanceiraEntity;
 import org.fintech.bank.entity.TransacaoFinanceiraEntity;
 import org.fintech.bank.enums.StatusContaEnum;
-import org.fintech.bank.enums.TipoContaEnum;
 import org.fintech.bank.enums.TipoTransacaoFinEnum;
 import org.fintech.bank.exception.*;
 import org.fintech.bank.repository.TransacaoFinanceiraRepository;
@@ -27,10 +26,9 @@ public class EstornoFinanceiroService {
     /**
      * Realiza estorno de valores.
      * @param idTransacao
-     * @param codigoAporte
      */
-    public void realizarEstorno(Long idTransacao, String codigoAporte){
-        this.prepararTransacao(idTransacao, codigoAporte);
+    public void realizarEstorno(Long idTransacao){
+        this.prepararTransacao(idTransacao);
         this.validarEntidadeTransacao();
         this.transFinRepository.save(this.transFinEntity);
 
@@ -41,9 +39,8 @@ public class EstornoFinanceiroService {
     /**
      * Prepara objeto de transacção financeira.
      * @param idTransacao
-     * @param codigoAporte
      */
-    private void prepararTransacao(Long idTransacao, String codigoAporte){
+    private void prepararTransacao(Long idTransacao){
 
         Optional<TransacaoFinanceiraEntity> transacaoAnterior = this.transFinRepository.findById(idTransacao);
 
@@ -62,7 +59,6 @@ public class EstornoFinanceiroService {
 
         this.transFinEntity = new TransacaoFinanceiraEntity();
 
-        this.transFinEntity.setCodigoAporte(codigoAporte);
         this.transFinEntity.setValor(transacaoAnterior.get().getValor());
         this.transFinEntity.setContaOrigem(transacaoAnterior.get().getContaDestino());
         this.transFinEntity.setContaDestino(transacaoAnterior.get().getContaOrigem());
@@ -78,16 +74,6 @@ public class EstornoFinanceiroService {
      */
 
     private void validarEntidadeTransacao(){
-
-        //Verifica se o tipo da conta destino é matriz.
-        if(this.transFinEntity.getContaDestino().getTipoContaBancaria().getId() == TipoContaEnum.MATRIZ.getValue()){
-
-            //Verifica se o código de aporte é nulo
-            if(this.transFinEntity.getCodigoAporte() == null){
-                throw new CodigoAporteNuloException();
-            }
-
-        }
 
         //Verifica se a conta destino está bloqueada.
         if(StatusContaEnum.BLOQUEADA.getValue() == transFinEntity.getContaDestino().getStatusContaBancaria().getId()){
@@ -113,7 +99,6 @@ public class EstornoFinanceiroService {
         if(transFinEntity.getContaDestino().getSaldo().doubleValue() < transFinEntity.getValor().doubleValue()){
             throw new SaldoInsuficienteEstornoException();
         }
-
 
     }
 
