@@ -6,7 +6,9 @@ import org.fintech.bank.service.TransacaoFinanceiraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 /**
  * @author Danilo Valente
@@ -31,8 +33,12 @@ public class TransacaoFinanceiraResource {
 
     @PostMapping("/transacao-financeira")
     public ResponseEntity save(@RequestBody TransacaoFinanceiraDTO dto){
-        this.service.realizarTransacao(dto);
-        return ResponseEntity.accepted().body("");
+        TransacaoFinanceiraDTO transacao = this.service.realizarTransacao(dto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(transacao.getIdTransacao()).toUri();
+        return ResponseEntity.created(location).body(transacao);
     }
 
     @GetMapping("/transacao-financeira-estorno/{idTransacao}")
