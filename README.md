@@ -40,10 +40,10 @@ http://localhost:8080/api/conta/pessoa-fisica
 {
 	"idConta": null,
 	"idContaPai": null,
-    "saldo": 500.00,
-    "idTipoConta": 1,
-    "idStatusConta": 1,
-    "pessoaFisica": {
+        "saldo": 500.00,
+        "idTipoConta": 1,
+        "idStatusConta": 1,
+        "pessoaFisica": {
         "nome": "Fulano da Silva",
         "cpf": 12356987123,
         "idTipoPessoa": 1,
@@ -54,10 +54,10 @@ http://localhost:8080/api/conta/pessoa-fisica
 {
 	"idConta": null,
 	"idContaPai": null,
-    "saldo": 500.00,
-    "idTipoConta": 1,
-    "idStatusConta": 1,
-    "pessoaFisica": {
+        "saldo": 500.00,
+        "idTipoConta": 1,
+        "idStatusConta": 1,
+        "pessoaFisica": {
         "nome": "Siclano da Silva ",
         "cpf": 12569999999,
         "idTipoPessoa": 1,
